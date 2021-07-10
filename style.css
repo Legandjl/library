@@ -2,19 +2,87 @@
 v2.0 | 20110126
 License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -22,58 +90,88 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
     list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
     content: '';
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-p, th{
+p,
+th {
     color: #212121;
 }
 
 body {
 
+    font-family: 'Nunito', sans-serif;
+
+
+}
+
+#wrapper {
+
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    
+
+
 }
 
 #sideBar {
-    grid-column: 1;   
-    
+    grid-column: 1;
+
     display: grid;
-    align-items: center;  
+    align-items: center;
     justify-items: center;
     grid-template-rows: auto 2fr 1fr;
-    padding:20px;
+    padding: 20px;
     background-color: #bbb6b6;
-    
+
+
+
 }
 
 #bookDisplay {
 
-    grid-column: 2;   
-   
+    grid-column: 2;
+
     justify-items: center;
     justify-content: center;
     background-color: #f1f1f1;
@@ -89,8 +187,8 @@ body {
     grid-gap: 20px;
     align-self: center;
     justify-self: center;
-   
-    
+
+
 }
 
 #bookInfo {
@@ -100,11 +198,7 @@ body {
     grid-gap: 20px;
 }
 
-#bookLogo {
-
-  
-   
-}
+#bookLogo {}
 
 #logoWrap {
 
@@ -117,19 +211,20 @@ body {
     align-items: center;
     font-family: 'Yellowtail', cursive;
     font-size: 64px;
+    margin-top: 30px;
 }
 
 #sideBarFooter {
 
     align-self: flex-end;
- 
+
 }
 
 
 #displayTable {
 
-    width:100%;
-   
+    width: 100%;
+
     margin-top: 30px;
 
 
@@ -139,49 +234,88 @@ body {
 
     font-family: 'Yellowtail', cursive;
     font-size: 36px;
- 
-    padding:10px;
+
+    padding: 10px;
     background-color: #d4d9dd;
-    
+    text-decoration: underline;
+
 }
 
 th {
 
-    padding:10px;
+    padding: 10px;
 }
 
-input[type = text] {
+input[type=text] {
 
     border-style: none;
-    height:25px;
-    width:220px;
+    height: 25px;
+    width: 220px;
     background-color: #bbb6b6;
-    border-bottom:solid 1px;
-  
-    padding:6px;
+    border-bottom: solid 1px;
+
+    padding: 6px;
 }
 
-textarea:focus, input:focus {
+textarea:focus,
+input:focus {
 
-    outline:none;
-    
+    outline: none;
+
 }
 
 input:focus::placeholder {
     color: transparent;
-  }
+}
 
-button {
+#submitButton {
 
-    width:100px;
+    width: 100px;
     justify-self: center;
     margin-top: 30px;
-    height:40px;
+    height: 40px;
     background-color: #D4D9DD;
     border-style: solid;
     border-radius: 8px;
     border-color: #D4D9DD;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    font-family: "nunito";
 
+
+}
+
+#submitButton:active {
+
+    scale: 0.97;
+    transition: ease-in-out 4ms;
+}
+
+tr:nth-child(odd) {
+    background-color: #d4d9dd;
+}
+
+.sideBarToggle {
+
+    display: none !important;
+
+}
+
+#menu {
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+
+
+.bodyToggle {
+    grid-template-columns: 1fr !important;
+
+}
+
+.bookDisplayToggle {
+
+    grid-column: 1 !important;
 
 }
