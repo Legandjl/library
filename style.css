@@ -1,0 +1,187 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+p, th{
+    color: #212121;
+}
+
+body {
+
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    
+}
+
+#sideBar {
+    grid-column: 1;   
+    
+    display: grid;
+    align-items: center;  
+    justify-items: center;
+    grid-template-rows: auto 2fr 1fr;
+    padding:20px;
+    background-color: #bbb6b6;
+    
+}
+
+#bookDisplay {
+
+    grid-column: 2;   
+   
+    justify-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
+
+
+
+#formWrap {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    border-style: solid;
+    grid-gap: 20px;
+    align-self: center;
+    justify-self: center;
+   
+    
+}
+
+#bookInfo {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+#bookLogo {
+
+  
+   
+}
+
+#logoWrap {
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-self: flex-start;
+    justify-self: center;
+    grid-gap: 10px;
+    text-align: center;
+    align-items: center;
+    font-family: 'Yellowtail', cursive;
+    font-size: 64px;
+}
+
+#sideBarFooter {
+
+    align-self: flex-end;
+ 
+}
+
+
+#displayTable {
+
+    width:100%;
+   
+    margin-top: 30px;
+
+
+}
+
+.tableHeading {
+
+    font-family: 'Yellowtail', cursive;
+    font-size: 36px;
+ 
+    padding:10px;
+    background-color: #d4d9dd;
+    
+}
+
+th {
+
+    padding:10px;
+}
+
+input[type = text] {
+
+    border-style: none;
+    height:25px;
+    width:220px;
+    background-color: #bbb6b6;
+    border-bottom:solid 1px;
+  
+    padding:6px;
+}
+
+textarea:focus, input:focus {
+
+    outline:none;
+    
+}
+
+input:focus::placeholder {
+    color: transparent;
+  }
+
+button {
+
+    width:100px;
+    justify-self: center;
+    margin-top: 30px;
+    height:40px;
+    background-color: #D4D9DD;
+    border-style: solid;
+    border-radius: 8px;
+    border-color: #D4D9DD;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+
+}
