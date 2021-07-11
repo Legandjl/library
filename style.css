@@ -141,8 +141,6 @@ th {
 body {
 
     font-family: 'Nunito', sans-serif;
-
-
 }
 
 #wrapper {
@@ -150,13 +148,10 @@ body {
     min-height: 100vh;
     display: grid;
     grid-template-columns: minmax(330px, 20vw) 1fr;
-
-
 }
 
 #sideBar {
     grid-column: 1;
-
     display: grid;
     align-items: center;
     justify-items: center;
@@ -167,16 +162,11 @@ body {
     width: 18vw;
     min-width: 300px;
     height:100vh;
-   
-
-
-
 }
 
 #bookDisplay {
 
     grid-column: 2;
-
     justify-items: center;
     justify-content: center;
     background-color: #f1f1f1;
@@ -192,8 +182,6 @@ body {
     grid-gap: 20px;
     align-self: center;
     justify-self: center;
-
-
 }
 
 #checkWrap {
@@ -243,17 +231,13 @@ body {
 #displayTable {
 
     width: 100%;
-
     margin-top: 30px;
-
-
 }
 
 .tableHeading {
 
     font-family: 'Yellowtail', cursive;
     font-size: 36px;
-
     padding: 10px;
     background-color: #d4d9dd;
     text-decoration: underline;
@@ -272,7 +256,6 @@ input[type=text] {
     width: 220px;
     background-color: #bbb6b6;
     border-bottom: solid 1px;
-
     padding: 6px;
 }
 
@@ -299,7 +282,6 @@ input:focus::placeholder {
     border-color: #D4D9DD;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     font-family: "nunito";
-
 
 }
 
@@ -339,3 +321,10 @@ tr:nth-child(odd) {
     grid-column: 1 !important;
 
 }
+
+tr img:hover, #submitButton:hover{
+
+    cursor: pointer;
+
+}
+

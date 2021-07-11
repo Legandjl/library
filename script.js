@@ -40,6 +40,9 @@ function toggleSidebar(e) {
 
 function formSubmitted(e) {
 
+    // if book title not already in library do stuff
+    //else return
+
     let checkBox = document.querySelector("#read");
     let readValue;    
 
@@ -57,12 +60,7 @@ function formSubmitted(e) {
     let title = form.elements[0].value;
     let author = form.elements[1].value;
     let length = form.elements[2].value;
-    let readStatus = readValue;
-
-    console.log(form.elements[3].value); //need to check if checkbox is checked
-
-    //if checked add read
-    //else add unread
+    let readStatus = readValue;   
 
     let book = addBookToLIbrary(title, author, length, readValue);
     
@@ -104,6 +102,8 @@ function updateLibrary(book) {
         row.appendChild(cell4);
         row.appendChild(cell5);
         //need to append bin icon
+
+        row.addEventListener("click", binClick) //will log e.target so can check if its the bin
         row.setAttribute("data-id",myLibrary.indexOf(book) );
         table.appendChild(row);
 }
@@ -124,7 +124,15 @@ function readStatusClick(e) {
 function binClick(e) {
 
     //get parent - should be row
-    //remove via data tag
+    //remove via data tag   
 
-    console.log(e.target);
+    if(e.target.src != undefined ) {
+
+        let toRemove = e.target.parentElement.parentNode.dataset.id;
+        myLibrary.splice(toRemove, 1);
+        let row = e.target.parentElement.parentNode;
+        row.remove();
+
+
+    }
 } 
