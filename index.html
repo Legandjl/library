@@ -21,6 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -39,6 +40,8 @@
                 <img id="bookLogo" src="images/book.png">
                 <p>Library</p>
 
+                
+
             </div>
 
             <div id=formWrap>
@@ -47,7 +50,16 @@
                     <input type="text" placeholder="Title" required>
                     <input type="text" placeholder="Author" required>
                     <input type="text" placeholder="Length" required>
+                   
+
+                    <div id = "checkWrap">
+                        <label for = "read">Read Status:</label>
+                    <input type = "checkbox" id = "read" name = "read">
+                </div>
+                    
                     <input id="submitButton" type="Submit" value="Submit"></button>
+          
+                    
 
                 </form>
             </div>
@@ -73,14 +85,6 @@
 
                 </tr>
 
-                <tr>
-                    <th>The hobbit</th>
-                    <th>JRR Tolkien</th>
-                    <th>200</th>
-                    <th>read</th>
-                    <th> <img src="images/bin.png"> </th>
-
-                </tr>
 
             </table>
         </div>
