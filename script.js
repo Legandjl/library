@@ -14,7 +14,6 @@ function Book(title, author, pages, readValue) {
     this.author = author;
     this.readStatus = readValue;
 
-
 }
 
 Book.prototype.info = function () {
@@ -25,15 +24,13 @@ Book.prototype.info = function () {
 function addBookToLIbrary(title, author, pages, readValue) {
 
     let book = new Book(title, author, pages, readValue);
-    myLibrary.push(book);
-    console.log(myLibrary);
-    return;
+    myLibrary.push(book);    
+    return book;
 
 }
 
 function toggleSidebar(e) {
 
-    console.log(sideBar);
     let body = document.querySelector("#wrapper");
     body.classList.toggle("bodyToggle");
     let display = document.querySelector("#bookDisplay");
@@ -44,8 +41,7 @@ function toggleSidebar(e) {
 function formSubmitted(e) {
 
     let checkBox = document.querySelector("#read");
-    let readValue;
-    console.log(checkBox.checked);
+    let readValue;    
 
     if(checkBox.checked == true) {
 
@@ -68,20 +64,17 @@ function formSubmitted(e) {
     //if checked add read
     //else add unread
 
-    addBookToLIbrary(title, author, length, readValue);
+    let book = addBookToLIbrary(title, author, length, readValue);
     
-    updateLibrary();
+    updateLibrary(book);
     e.preventDefault();
     
 
 }
 
-function updateLibrary() {
+function updateLibrary(book) {
 
     let table = document.querySelector("#displayTable");
-
-
-    myLibrary.forEach(function(book) {
 
         let row = document.createElement("tr");
         let cell = document.createElement("th");
@@ -97,8 +90,13 @@ function updateLibrary() {
         
         let binIcon = document.createElement("img");
         binIcon.src = "images/bin.png";
+      
 
         cell5.appendChild(binIcon);
+        cell4.addEventListener("click", readStatusClick)
+        cell5.addEventListener("click", binClick)
+
+        //need to add classes so hover works
 
         row.appendChild(cell);
         row.appendChild(cell2);
@@ -107,12 +105,26 @@ function updateLibrary() {
         row.appendChild(cell5);
         //need to append bin icon
         row.setAttribute("data-id",myLibrary.indexOf(book) );
-        console.log(row)
-
         table.appendChild(row);
-
-
-
-        console.log(book);
-    })
 }
+
+function readStatusClick(e) {
+
+    console.log(e.target)
+
+    if(e.target.innerText == "read") {
+
+        e.target.innerText = "unread";
+        return;
+    }
+
+    e.target.innerText = "read";
+}
+
+function binClick(e) {
+
+    //get parent - should be row
+    //remove via data tag
+
+    console.log(e.target);
+} 
