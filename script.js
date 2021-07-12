@@ -29,8 +29,7 @@ function addBook(title, author, pages, readValue) {
 }
 
 function formSubmitted(e) {
-    // if book title not already in library do stuff
-    //else return
+  
     let checkBox = document.querySelector("#read");
     let readValue;
 
