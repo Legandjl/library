@@ -1,15 +1,11 @@
 let localLib = JSON.parse(localStorage.getItem("myLibrary"));
 let myLibrary = [];
-
-checkLIb();
-
+checkForLocal();
 let menu = document.querySelector("#menu");
 let sideBar = document.querySelector("#sideBar")
 menu.addEventListener("click", toggleSidebar);
 let form = document.querySelector("#bookInfo");
 form.addEventListener("submit", formSubmitted);
-let binLogo;
-
 
 function Book(title, author, pages, readValue) {
 
@@ -21,7 +17,6 @@ function Book(title, author, pages, readValue) {
 }
 
 Book.prototype.info = function () {
-
     return this.title + ", " + this.pages + " pages";
 }
 
@@ -29,9 +24,107 @@ function addBook(title, author, pages, readValue) {
 
     let book = new Book(title, author, pages, readValue);
     myLibrary.push(book);
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    updateLocalStorage();
     return book;
+}
 
+function formSubmitted(e) {
+    // if book title not already in library do stuff
+    //else return
+    let checkBox = document.querySelector("#read");
+    let readValue;
+
+    if (checkBox.checked == true) {
+
+        readValue = "Read";
+
+    } else {
+
+        readValue = "Unread";
+    }
+
+    let title = form.elements[0].value;
+    let author = form.elements[1].value;
+    let length = form.elements[2].value;
+    let readStatus = readValue;
+    let book = addBook(title, author, length, readValue);
+    updateLibrary(book);
+    form.reset();
+    e.preventDefault();
+}
+
+function updateLibrary(book) {
+
+    let table = document.querySelector("#displayTable");
+    let row = document.createElement("tr");
+    let binIcon = document.createElement("img");    
+    let cells = [];
+    binIcon.src = "images/bin.png";
+
+    for (x = 0; x < 5; x++) {
+
+        cells.push(document.createElement("th"));
+    }
+
+    cells[0].appendChild(document.createTextNode(book.title));
+    cells[1].appendChild(document.createTextNode(book.author));
+    cells[2].appendChild(document.createTextNode(book.pages));
+    cells[3].appendChild(document.createTextNode(book.readStatus));
+    cells[3].classList.add("readState");
+    cells[3].addEventListener("click", readStatusClick);
+    cells[4].appendChild(binIcon);  
+
+    cells.forEach(cell => {
+        row.appendChild(cell);
+    })
+    //need to add classes so hover works   
+   
+    row.setAttribute("data-id", myLibrary.indexOf(book));
+    table.appendChild(row);
+    row.addEventListener("click", binClick);
+}
+
+function readStatusClick(e) {
+
+    let id = e.target.parentElement.dataset.id;
+
+    if (e.target.innerText == "Read") {
+        e.target.innerText = "Unread";
+        myLibrary[id].readStatus = "Unread";        
+        updateLocalStorage();
+        return;
+    }
+
+    e.target.innerText = "Read";
+    myLibrary[id].readStatus = "Read"
+    updateLocalStorage();
+}
+
+function binClick(e) {   
+
+    if (e.target.src != undefined) {
+
+        let toRemove = e.target.parentElement.parentNode.dataset.id;        
+        myLibrary.splice(toRemove, 1);        
+        let row = e.target.parentElement.parentNode;       
+        row.remove();
+        updateLocalStorage();
+    }
+}
+
+function checkForLocal() {
+
+    if (localLib == null) {
+
+        return;
+
+    } else {
+        
+        localLib.forEach(element => {
+            myLibrary.push(element);
+            updateLibrary(element);
+        })
+    }
 }
 
 function toggleSidebar(e) {
@@ -44,117 +137,9 @@ function toggleSidebar(e) {
     return;
 }
 
-function formSubmitted(e) {
+function updateLocalStorage() {
 
-    // if book title not already in library do stuff
-    //else return
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    localLib = JSON.parse(localStorage.getItem("myLibrary"));
 
-    let checkBox = document.querySelector("#read");
-    let readValue;
-
-    if (checkBox.checked == true) {
-
-        readValue = "read";
-        
-    } else {
-
-        readValue = "unread";
-    }
-
-
-    let title = form.elements[0].value;
-    let author = form.elements[1].value;
-    let length = form.elements[2].value;
-    let readStatus = readValue;
-
-    let book = addBook(title, author, length, readValue);
-
-    updateLibrary(book);
-    form.reset();
-    e.preventDefault();
-
-}
-
-function updateLibrary(book) {
-
-    let table = document.querySelector("#displayTable");
-
-    let row = document.createElement("tr");
-    let cell = document.createElement("th");
-    let cell2 = document.createElement("th")
-    let cell3 = document.createElement("th");
-    let cell4 = document.createElement("th");
-    let cell5 = document.createElement("th");
-
-    cell.appendChild(document.createTextNode(book.title));
-    cell2.appendChild(document.createTextNode(book.author));
-    cell3.appendChild(document.createTextNode(book.pages));
-    cell4.appendChild(document.createTextNode(book.readStatus));
-
-    let binIcon = document.createElement("img");
-    binIcon.src = "images/bin.png";
-
-
-    cell5.appendChild(binIcon);
-    cell4.addEventListener("click", readStatusClick)
-    cell5.addEventListener("click", binClick)
-
-    //need to add classes so hover works
-
-    row.appendChild(cell);
-    row.appendChild(cell2);
-    row.appendChild(cell3);
-    row.appendChild(cell4);
-    row.appendChild(cell5);
-    //need to append bin icon
-
-    row.addEventListener("click", binClick) //will log e.target so can check if its the bin
-    row.setAttribute("data-id", myLibrary.indexOf(book));
-    table.appendChild(row);
-}
-
-function readStatusClick(e) {
-
-    if (e.target.innerText == "read") {
-        e.target.innerText = "unread";
-        return;
-    }
-
-    e.target.innerText = "read";
-
-    
-}
-
-function binClick(e) {
-
-
-    if (e.target.src != undefined) {
-
-        let toRemove = e.target.parentElement.parentNode.dataset.id;
-        console.log(toRemove + "removal")
-        myLibrary.splice(toRemove, 1);
-        let row = e.target.parentElement.parentNode;
-        console.log(myLibrary);
-        localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-        row.remove();
-
-    }
-}
-
-function checkLIb() {
-
-    if(localLib == null) {
-
-       return;
-    }
-
-    else {
-
-        localLib.forEach(element => {            
-
-            myLibrary.push(element);
-            updateLibrary(element);
-        } )
-
-    }  
 }
