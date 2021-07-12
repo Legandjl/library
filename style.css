@@ -249,7 +249,7 @@ th {
     padding: 10px;
 }
 
-input[type=text] {
+input[type=text], input[type=number] {
 
     border-style: none;
     height: 25px;
@@ -328,3 +328,12 @@ tr img:hover, #submitButton:hover{
 
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }

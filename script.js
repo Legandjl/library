@@ -24,7 +24,7 @@ Book.prototype.info = function () {
 function addBookToLIbrary(title, author, pages, readValue) {
 
     let book = new Book(title, author, pages, readValue);
-    myLibrary.push(book);    
+    myLibrary.push(book);
     return book;
 
 }
@@ -36,6 +36,7 @@ function toggleSidebar(e) {
     let display = document.querySelector("#bookDisplay");
     display.classList.toggle("bookDisplayToggle");
     sideBar.classList.toggle("sideBarToggle");
+    return;
 }
 
 function formSubmitted(e) {
@@ -44,29 +45,26 @@ function formSubmitted(e) {
     //else return
 
     let checkBox = document.querySelector("#read");
-    let readValue;    
+    let readValue;
 
-    if(checkBox.checked == true) {
+    if (checkBox.checked == true) {
 
         readValue = "read";
-    }
-
-    else {
+    } else {
 
         readValue = "unread";
     }
 
-   
+
     let title = form.elements[0].value;
     let author = form.elements[1].value;
     let length = form.elements[2].value;
-    let readStatus = readValue;   
+    let readStatus = readValue;
 
     let book = addBookToLIbrary(title, author, length, readValue);
-    
+
     updateLibrary(book);
     e.preventDefault();
-    
 
 }
 
@@ -74,46 +72,43 @@ function updateLibrary(book) {
 
     let table = document.querySelector("#displayTable");
 
-        let row = document.createElement("tr");
-        let cell = document.createElement("th");
-        let cell2 = document.createElement("th")
-        let cell3 = document.createElement("th");
-        let cell4 = document.createElement("th");
-        let cell5 = document.createElement("th");
+    let row = document.createElement("tr");
+    let cell = document.createElement("th");
+    let cell2 = document.createElement("th")
+    let cell3 = document.createElement("th");
+    let cell4 = document.createElement("th");
+    let cell5 = document.createElement("th");
 
-        cell.appendChild(document.createTextNode(book.title));
-        cell2.appendChild(document.createTextNode(book.author));
-        cell3.appendChild(document.createTextNode(book.pages));
-        cell4.appendChild(document.createTextNode(book.readStatus));
-        
-        let binIcon = document.createElement("img");
-        binIcon.src = "images/bin.png";
-      
+    cell.appendChild(document.createTextNode(book.title));
+    cell2.appendChild(document.createTextNode(book.author));
+    cell3.appendChild(document.createTextNode(book.pages));
+    cell4.appendChild(document.createTextNode(book.readStatus));
 
-        cell5.appendChild(binIcon);
-        cell4.addEventListener("click", readStatusClick)
-        cell5.addEventListener("click", binClick)
+    let binIcon = document.createElement("img");
+    binIcon.src = "images/bin.png";
 
-        //need to add classes so hover works
 
-        row.appendChild(cell);
-        row.appendChild(cell2);
-        row.appendChild(cell3);
-        row.appendChild(cell4);
-        row.appendChild(cell5);
-        //need to append bin icon
+    cell5.appendChild(binIcon);
+    cell4.addEventListener("click", readStatusClick)
+    cell5.addEventListener("click", binClick)
 
-        row.addEventListener("click", binClick) //will log e.target so can check if its the bin
-        row.setAttribute("data-id",myLibrary.indexOf(book) );
-        table.appendChild(row);
+    //need to add classes so hover works
+
+    row.appendChild(cell);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    row.appendChild(cell4);
+    row.appendChild(cell5);
+    //need to append bin icon
+
+    row.addEventListener("click", binClick) //will log e.target so can check if its the bin
+    row.setAttribute("data-id", myLibrary.indexOf(book));
+    table.appendChild(row);
 }
 
 function readStatusClick(e) {
 
-    console.log(e.target)
-
-    if(e.target.innerText == "read") {
-
+    if (e.target.innerText == "read") {
         e.target.innerText = "unread";
         return;
     }
@@ -123,16 +118,13 @@ function readStatusClick(e) {
 
 function binClick(e) {
 
-    //get parent - should be row
-    //remove via data tag   
 
-    if(e.target.src != undefined ) {
+    if (e.target.src != undefined) {
 
         let toRemove = e.target.parentElement.parentNode.dataset.id;
         myLibrary.splice(toRemove, 1);
         let row = e.target.parentElement.parentNode;
         row.remove();
 
-
     }
-} 
+}
