@@ -1,10 +1,14 @@
+let localLib = JSON.parse(localStorage.getItem("myLibrary"));
 let myLibrary = [];
+
+checkLIb();
+
 let menu = document.querySelector("#menu");
 let sideBar = document.querySelector("#sideBar")
 menu.addEventListener("click", toggleSidebar);
 let form = document.querySelector("#bookInfo");
 form.addEventListener("submit", formSubmitted);
-let binLogo = document.querySelector("")
+let binLogo;
 
 
 function Book(title, author, pages, readValue) {
@@ -21,10 +25,11 @@ Book.prototype.info = function () {
     return this.title + ", " + this.pages + " pages";
 }
 
-function addBookToLIbrary(title, author, pages, readValue) {
+function addBook(title, author, pages, readValue) {
 
     let book = new Book(title, author, pages, readValue);
     myLibrary.push(book);
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
     return book;
 
 }
@@ -50,6 +55,7 @@ function formSubmitted(e) {
     if (checkBox.checked == true) {
 
         readValue = "read";
+        
     } else {
 
         readValue = "unread";
@@ -61,9 +67,10 @@ function formSubmitted(e) {
     let length = form.elements[2].value;
     let readStatus = readValue;
 
-    let book = addBookToLIbrary(title, author, length, readValue);
+    let book = addBook(title, author, length, readValue);
 
     updateLibrary(book);
+    form.reset();
     e.preventDefault();
 
 }
@@ -114,6 +121,8 @@ function readStatusClick(e) {
     }
 
     e.target.innerText = "read";
+
+    
 }
 
 function binClick(e) {
@@ -122,9 +131,30 @@ function binClick(e) {
     if (e.target.src != undefined) {
 
         let toRemove = e.target.parentElement.parentNode.dataset.id;
+        console.log(toRemove + "removal")
         myLibrary.splice(toRemove, 1);
         let row = e.target.parentElement.parentNode;
+        console.log(myLibrary);
+        localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
         row.remove();
 
     }
+}
+
+function checkLIb() {
+
+    if(localLib == null) {
+
+       return;
+    }
+
+    else {
+
+        localLib.forEach(element => {            
+
+            myLibrary.push(element);
+            updateLibrary(element);
+        } )
+
+    }  
 }
