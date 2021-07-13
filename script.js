@@ -73,14 +73,12 @@ function updateLibrary(book) {
 
             cells[3].classList.add("readState");
             cells[3].addEventListener("click", readStatusClick);
-
         }
+
+        row.appendChild(cells[x]);
     }   
 
-    cells.forEach(cell => {
-        row.appendChild(cell);
-    })
-   
+  
     row.setAttribute("data-id", myLibrary.indexOf(book));
     table.appendChild(row);
     row.addEventListener("click", binClick);
