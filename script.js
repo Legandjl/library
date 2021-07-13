@@ -29,7 +29,7 @@ function addBook(title, author, pages, readValue) {
 }
 
 function formSubmitted(e) {
-  
+
     let checkBox = document.querySelector("#read");
     let readValue;
 
@@ -56,27 +56,30 @@ function updateLibrary(book) {
 
     let table = document.querySelector("#displayTable");
     let row = document.createElement("tr");
-    let binIcon = document.createElement("img");    
+    let binIcon = document.createElement("img");
     let cells = [];
     binIcon.src = "images/bin.png";
+    let nodes = [document.createTextNode(book.title), document.createTextNode(book.author), document.createTextNode(book.pages),
+        document.createTextNode(book.readStatus), binIcon
+    ];
+
 
     for (x = 0; x < 5; x++) {
 
         cells.push(document.createElement("th"));
-    }
+        cells[x].appendChild(nodes[x]);
 
-    cells[0].appendChild(document.createTextNode(book.title));
-    cells[1].appendChild(document.createTextNode(book.author));
-    cells[2].appendChild(document.createTextNode(book.pages));
-    cells[3].appendChild(document.createTextNode(book.readStatus));
-    cells[3].classList.add("readState");
-    cells[3].addEventListener("click", readStatusClick);
-    cells[4].appendChild(binIcon);  
+        if (x == 3) {
+
+            cells[3].classList.add("readState");
+            cells[3].addEventListener("click", readStatusClick);
+
+        }
+    }   
 
     cells.forEach(cell => {
         row.appendChild(cell);
     })
-    //need to add classes so hover works   
    
     row.setAttribute("data-id", myLibrary.indexOf(book));
     table.appendChild(row);
@@ -89,7 +92,7 @@ function readStatusClick(e) {
 
     if (e.target.innerText == "Read") {
         e.target.innerText = "Unread";
-        myLibrary[id].readStatus = "Unread";        
+        myLibrary[id].readStatus = "Unread";
         updateLocalStorage();
         return;
     }
@@ -99,13 +102,13 @@ function readStatusClick(e) {
     updateLocalStorage();
 }
 
-function binClick(e) {   
+function binClick(e) {
 
     if (e.target.src != undefined) {
 
-        let toRemove = e.target.parentElement.parentNode.dataset.id;        
-        myLibrary.splice(toRemove, 1);        
-        let row = e.target.parentElement.parentNode;       
+        let toRemove = e.target.parentElement.parentNode.dataset.id;
+        myLibrary.splice(toRemove, 1);
+        let row = e.target.parentElement.parentNode;
         row.remove();
         updateLocalStorage();
     }
@@ -118,7 +121,7 @@ function checkForLocal() {
         return;
 
     } else {
-        
+
         localLib.forEach(element => {
             myLibrary.push(element);
             updateLibrary(element);
