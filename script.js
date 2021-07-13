@@ -13,7 +13,6 @@ function Book(title, author, pages, readValue) {
     this.pages = pages;
     this.author = author;
     this.readStatus = readValue;
-
 }
 
 Book.prototype.info = function () {
@@ -77,7 +76,6 @@ function updateLibrary(book) {
 
         row.appendChild(cells[x]);
     }   
-
   
     row.setAttribute("data-id", myLibrary.indexOf(book));
     table.appendChild(row);
