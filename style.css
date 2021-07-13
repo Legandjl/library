@@ -344,3 +344,11 @@ input[type=number] {
     cursor: pointer;
 
   }
+
+  @media only screen and (max-height: 450px) {
+
+    #sideBarFooter {
+
+        display: none;
+    }
+  }
