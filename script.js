@@ -7,17 +7,27 @@ menu.addEventListener("click", toggleSidebar);
 let form = document.querySelector("#bookInfo");
 form.addEventListener("submit", formSubmitted);
 
-function Book(title, author, pages, readValue) {
-
+class Book {
+    
+    constructor(title, author, pages, readValue) {
     this.title = title;
     this.pages = pages;
     this.author = author;
     this.readStatus = readValue;
+
+    }
+
+    info() {
+
+        return this.title + ", " + this.pages + " pages";
+    }
+
+    
 }
 
-Book.prototype.info = function () {
-    return this.title + ", " + this.pages + " pages";
-}
+
+
+
 
 function addBook(title, author, pages, readValue) {
 
